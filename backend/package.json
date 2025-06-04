@@ -1,0 +1,15 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Learning how to create a server",
+  "main": "index.js",
+  "scripts": {
+    "start":"node src/app.js",
+    "dev":"nodemon src/app.js"
+  },
+  "author": "Ayush",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
