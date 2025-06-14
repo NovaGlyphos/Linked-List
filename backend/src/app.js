@@ -25,6 +25,38 @@ app.post("/signup",async (req,res)=>{
 
 });
 
+//Get user by email
+
+app.get("/user",async (req,res)=>{
+    const userEmail = req.body.emailId;  //The email that we will send via request
+    try{
+        const user = await User.find({emailId:userEmail});     //This method will find the em ailId 
+        if(user.length === 0){
+            res.status(400).send("kaha gya usse dhundooo");
+        }
+        else{
+            res.send(user);
+        }   
+    }
+    catch(err){
+        res.status(400).send("Something went wrong "+err.message);
+    }
+})
+
+//Get data of all the users
+app.get("/feed",async (req,res)=>{
+    try{
+        const users = await User.find({});   //Here we pass empty filter to get data of all the users
+        res.send(users);
+    }
+    catch(err){
+        res.status(400).send("Something went wrong "+err.message);
+    }
+});
+
+
+
+
 connectDB()
     .then(()=>{
         console.log("Database connection established......");
