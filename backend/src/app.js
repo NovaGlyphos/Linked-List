@@ -54,6 +54,42 @@ app.get("/feed",async (req,res)=>{
     }
 });
 
+app.delete("/userDelete",async (req,res)=>{
+    const userId = req.body.userId;
+    try{
+        const deletedUser = await User.findByIdAndDelete(userId);
+        if(!deletedUser){
+            res.send("No user found to be deleted !!");
+        }
+        else{
+            res.send("User deleted successfully");
+        }
+    }
+    catch(err){
+        res.status(400).send("Something went wrong "+err.message);
+    }
+})
+
+// Update the user by ID
+app.patch("/user",async (req,res)=>{
+    const data = req.body;
+    const userId = req.body.userId;
+    try{
+        const updated = await User.findByIdAndUpdate({_id:userId},data,{returnDocument:"before"});
+        console.log(updated);
+        if(!updated){
+            res.status(404).send("Cannot find user to update!!");
+        }
+        else{
+            res.send("User updated successfully!!");
+        }
+    }
+    catch(err){
+        res.status(400).send("Something went wrong "+err.message);
+    }
+});
+
+
 
 
 
