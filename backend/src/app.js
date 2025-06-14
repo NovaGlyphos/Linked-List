@@ -1,17 +1,26 @@
 const express = require('express');
-const app = express();
+const app = express(); 
+const {connectDB} = require("./config/database")
+connectDB()
+    .then(()=>{
+        console.log("Database connection established......");
+        app.listen(3000,()=>{
+            console.log('server is running at port 3000');
+        });
+    })
+    .catch((err)=>{
+        console.errpr("Database cannot be connected");
+    })
+
+app.use("/admin",adminAuth);
+
+app.get("/admin/getAllDetails",(req,res)=>{
+    res.send("All data sent");
+});
+
+app.delete("/admin/deleteUser",(req,res)=>{
+    res.send("Deleted a user");
+});
 
 
-app.get("/user",(req,res)=>{
-    console.log("First route handler.....");
-    res.send("THIS WAS THE FIRST RH");
-})
 
-app.use("/",(req,res)=>{
-    console.log("/ route was called")
-    res.send("THIS IS THE MAIN / ROUTE");
-})
-
-app.listen(3000,()=>{
-    console.log('server is running at port 3000');
-})
