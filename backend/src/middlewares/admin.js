@@ -2,7 +2,7 @@
 
 const adminAuth = (req,res,next) => {
     const token = "abc";
-    const isAdminAuthorized = token === "abcdf";
+    const isAdminAuthorized = token === "abc    ";
     if(isAdminAuthorized){
         next();
     } 
