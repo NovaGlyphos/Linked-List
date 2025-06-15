@@ -2,11 +2,12 @@ const express = require('express');
 const app = express(); 
 const {connectDB} = require("./config/database");
 
+
 //Import User model so that we can create instance of User model
 const User = require("./models/user");
 
 //middlware
-app.use(express.json());
+app.use(express.json());    // convert json of request to js object
 
 //create an API to insert data in the database
 app.post("/signup",async (req,res)=>{

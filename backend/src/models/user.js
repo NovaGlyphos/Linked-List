@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const validator = require('validator');
 
 
 //Schema of the collection
@@ -15,6 +16,11 @@ const userSchema = mongoose.Schema({
         type:String,
         required:true,
         unique:true,
+        validate(value){
+            if(!validator.isEmail(value)){
+                throw new Error("Email is not valid!!!")
+            }
+        }
     },
     password:{
         type:String,
@@ -34,7 +40,12 @@ const userSchema = mongoose.Schema({
     },
     photoUrl:{
         type:String,
-        default:"https://hancockogundiyapartners.com/wp-content/uploads/2019/07/dummy-profile-pic-300x300.jpg"
+        default:"https://hancockogundiyapartners.com/wp-content/uploads/2019/07/dummy-profile-pic-300x300.jpg",
+        validate(value){
+            if(!validator.isURL(value)){
+                throw new Error("Not a valid photo url");
+            }
+        }
     },
     about:{
         type:String,
