@@ -54,6 +54,8 @@ app.get("/feed",async (req,res)=>{
     }
 });
 
+
+//Delete data by user Id
 app.delete("/userDelete",async (req,res)=>{
     const userId = req.body.userId;
     try{
@@ -69,6 +71,7 @@ app.delete("/userDelete",async (req,res)=>{
         res.status(400).send("Something went wrong "+err.message);
     }
 })
+
 
 // Update the user by ID
 app.patch("/user",async (req,res)=>{
@@ -89,6 +92,23 @@ app.patch("/user",async (req,res)=>{
     }
 });
 
+//Update user by email ID
+app.patch("/userEmail",async (req,res)=>{
+    const email = req.body.emailId;
+    const data = req.body;
+    try{
+        const updated = await User.findOneAndUpdate({emailId:email},data,{runValidators:true});
+        if(!updated){
+            res.status(404).send("Cannot find the email ID");
+        }
+        else{
+            res.send("User updated successfully!!!")
+        }
+    }
+    catch(err){
+        res.status(400).send("Something went wrong "+err.message);
+    }
+});
 
 
 
