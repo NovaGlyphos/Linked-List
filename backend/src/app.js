@@ -74,9 +74,17 @@ app.delete("/userDelete",async (req,res)=>{
 
 
 // Update the user by ID
-app.patch("/user",async (req,res)=>{
+app.patch("/user/:userId",async (req,res)=>{
+
+    const userId = req.params.userId;
     const data = req.body;
-    const userId = req.body.userId;
+
+    const ALLOWED_UPDATES = ["firstName","lastName","age","gender","photoUrl","about","skills"];
+    const isAllowed = Object.keys(data).every(key => ALLOWED_UPDATES.includes(key));
+    if(!isAllowed){
+        res.status(400).send("Update not allowed for this field");
+    }
+
     try{
         const updated = await User.findByIdAndUpdate({_id:userId},data,{returnDocument:"before"});
         console.log(updated);
@@ -95,7 +103,19 @@ app.patch("/user",async (req,res)=>{
 //Update user by email ID
 app.patch("/userEmail",async (req,res)=>{
     const email = req.body.emailId;
-    const data = req.body;
+
+    const data = {...req.body};  //clone the body to avoid mutation 
+
+    const ALLOWED_UPDATES = ["firstName","lastName","age","gender","photoUrl","about","skills"];
+
+    // Remove emailId from the data to update
+    delete data.emailId;
+
+    // Check if every key in `data` is allowed to be updated
+    const isAllowed = Object.keys(data).every(key => ALLOWED_UPDATES.includes(key));
+    if(!isAllowed){
+        res.status(400).send("Updating this field is not allowed");
+    }
     try{
         const updated = await User.findOneAndUpdate({emailId:email},data,{runValidators:true});
         if(!updated){
