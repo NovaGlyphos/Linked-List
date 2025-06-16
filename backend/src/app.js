@@ -3,12 +3,15 @@ const app = express();
 const {connectDB} = require("./config/database");
 const {validateSignUpData} = require('./utils/validations');
 const bcrypt = require('bcrypt');
+const cookieParser = require('cookie-parser');
+
 
 //Import User model so that we can create instance of User model
 const User = require("./models/user");
 
-//middlware
+//middlwares
 app.use(express.json());    // convert json of request to js object
+app.use(cookieParser());
 
 //create an API to insert data in the database
 app.post("/signup",async (req,res)=>{
@@ -54,6 +57,7 @@ app.post("/login",async (req,res)=>{
         //Now we will check whether pass is valid
         const isPasswordValid = await bcrypt.compare(password,user.password);
         if(isPasswordValid){
+            res.cookie("token","thisIsATokennnnnnnnn");
             res.send("Login successfull");
         }
         else{
@@ -64,6 +68,14 @@ app.post("/login",async (req,res)=>{
         res.status(400).send("ERROR: "+err.message);
     }
 });
+
+// Profile API
+app.get("/profile",async (req,res)=>{
+    const cookies = req.cookies;
+    console.log(cookies);
+    res.send("This is profile !!!");
+})
+
 
 //Get user by email
 app.get("/user",async (req,res)=>{
