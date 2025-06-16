@@ -1,7 +1,8 @@
 const express = require('express');
 const app = express(); 
 const {connectDB} = require("./config/database");
-
+const {validateSignUpData} = require('./utils/validations');
+const bcrypt = require('bcrypt');
 
 //Import User model so that we can create instance of User model
 const User = require("./models/user");
@@ -11,23 +12,60 @@ app.use(express.json());    // convert json of request to js object
 
 //create an API to insert data in the database
 app.post("/signup",async (req,res)=>{
-    const userObj = req.body;
-    
-    // We now create instance of user model
-    const user = new User(userObj);
-
     try{
+        //Validate the data coming from req.body
+        validateSignUpData(req);
+        
+        //Encrypt the password
+        const {firstName,lastName,emailId,password} = req.body;
+        const hashedPass = await bcrypt.hash(password,10);
+        console.log(hashedPass);
+
+        // We now create instance of user model
+        const user = new User({
+            firstName,
+            lastName,
+            emailId,
+            password:hashedPass,
+        });
+
         await user.save();
         res.send("User data saved successfully");
     }
     catch(err){
-        res.status(400).send("Error saving the user!!"+err.message);
+        res.status(400).send("ERROR: "+err.message);
     }
 
 });
 
-//Get user by email
+//Login API
 
+app.post("/login",async (req,res)=>{
+    try{
+        const {emailId,password} = req.body;
+        
+        //First of all we are checking that email ID exist or not
+        const user = await User.findOne({emailId:emailId});
+        console.log(user);
+
+        if(!user){
+            throw new Error("Email ID does not exist");
+        }
+        //Now we will check whether pass is valid
+        const isPasswordValid = await bcrypt.compare(password,user.password);
+        if(isPasswordValid){
+            res.send("Login successfull");
+        }
+        else{
+            res.send("Password is not valid")
+        }
+    }
+    catch(err){
+        res.status(400).send("ERROR: "+err.message);
+    }
+});
+
+//Get user by email
 app.get("/user",async (req,res)=>{
     const userEmail = req.body.emailId;  //The email that we will send via request
     try{
@@ -133,7 +171,7 @@ app.patch("/userEmail",async (req,res)=>{
 
 
 
-
+//Connecting to DB and listening to the application
 connectDB()
     .then(()=>{
         console.log("Database connection established......");
@@ -143,7 +181,7 @@ connectDB()
     })
     .catch((err)=>{
         console.errpr("Database cannot be connected");
-    })
+    });
 
 
 
