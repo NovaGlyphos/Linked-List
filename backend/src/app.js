@@ -6,6 +6,9 @@ const bcrypt = require('bcrypt');
 const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
 
+//Imported Middlewares
+const {userAuth} = require('./middlewares/auth')
+
 //Import User model so that we can create instance of User model
 const User = require("./models/user");
 
@@ -47,25 +50,29 @@ app.post("/login",async (req,res)=>{
     try{
         const {emailId,password} = req.body;
         
-        //First of all we are checking that email ID exist or not
+        // First of all we are checking that email ID exist or not
         const user = await User.findOne({emailId:emailId});
-        console.log(user);
+        // console.log(user);
 
+        // If email ID not found
         if(!user){
-            throw new Error("Email ID does not exist");
+            throw new Error("Invalid credentials");
         }
-        //Now we will check whether pass is valid
-        const isPasswordValid = await bcrypt.compare(password,user.password);
-        if(isPasswordValid){
-            //Create a token
-            const token = jwt.sign({_id:user._id},"SecretKey@123");
-            console.log(token);
 
-            res.cookie("token",token);
+        //Now we will check whether password is valid or not
+        const isPasswordValid = await bcrypt.compare(password,user.password);
+
+        //Password is valid
+        if(isPasswordValid){
+            //Create a token wrt to id of user
+            const token = jwt.sign({exp:Math.floor(Date.now()/1000)+10,_id:user._id},"SecretKey@123");   //{_id:user._id} this is secret data
+            // console.log(token);
+
+            res.cookie("token",token);  // Sent back the cookie with response
             res.send("Login successfull");
         }
         else{
-            res.send("Password is not valid")
+            res.send("Password is not valid");
         }
     }
     catch(err){
@@ -74,24 +81,29 @@ app.post("/login",async (req,res)=>{
 });
 
 // Profile API
-app.get("/profile",async (req,res)=>{
+app.get("/profile",userAuth ,async (req,res)=>{
     try{
-        const cookies = req.cookies;
-        //GET THE TOKEN
-        const {token} = cookies;     //The token we get inside cookie
-        const decodedMessage = jwt.verify(token,"SecretKey@123");   // The secret message that we passed while creating token
-        // console.log(decodedMessage);
-        const {_id} = decodedMessage;   //deconstructing the hidden message (here ID)
-        // console.log(_id);
-        res.send("This is profile !!!");
-
-        const userDetails = await User.findOne({_id:_id});
-        console.log(userDetails);
+        const user = req.user;   //This is coming from the middlware userAuth
+        console.log(user)
+        res.send("This is user profile");
     }
     catch(err){
         res.status(401).send("Unauthorized Access "+err.message);
     }
 })
+
+//Send connection Request
+app.post("/sendConnectionRequest",userAuth,async (req,res)=>{
+    try{
+        const user = req.user;   // extracting user from req object
+        const {firstName,lastName} = user;
+        res.send(`${firstName} ${lastName} sent you a connection request`);
+    }
+    catch(err){
+        res.status(400).send("Something went wrong: "+err.message);
+    }
+})
+
 
 //Get user by email
 app.get("/user",async (req,res)=>{
