@@ -57,13 +57,17 @@ const userSchema = mongoose.Schema({
     }
 },{timestamps:true});
 
+
+// Mongoose Schema Methods
+
+// To get the JWT token
 userSchema.methods.getJWT = async function(){
     const user = this;
-    const token = jwt.sign({exp:Math.floor(Date.now()/1000)+10,_id:user._id},"SecretKey@123");
+    const token = jwt.sign({exp:Math.floor(Date.now()/1000)+3600,_id:user._id},"SecretKey@123");
     return token;
 }
 
-
+// To compare the passwords (input,from DB)
 userSchema.methods.verifyPassword = async function(passwordInputByUser){
     const user = this;  //refers to that particular document
     const passwordHashed = user.password;   // will get the value from DB
