@@ -4,7 +4,7 @@ const {connectDB} = require("./config/database");
 const {validateSignUpData} = require('./utils/validations');
 const bcrypt = require('bcrypt');
 const cookieParser = require('cookie-parser');
-
+const jwt = require('jsonwebtoken');
 
 //Import User model so that we can create instance of User model
 const User = require("./models/user");
@@ -57,7 +57,11 @@ app.post("/login",async (req,res)=>{
         //Now we will check whether pass is valid
         const isPasswordValid = await bcrypt.compare(password,user.password);
         if(isPasswordValid){
-            res.cookie("token","thisIsATokennnnnnnnn");
+            //Create a token
+            const token = jwt.sign({_id:user._id},"SecretKey@123");
+            console.log(token);
+
+            res.cookie("token",token);
             res.send("Login successfull");
         }
         else{
@@ -71,11 +75,23 @@ app.post("/login",async (req,res)=>{
 
 // Profile API
 app.get("/profile",async (req,res)=>{
-    const cookies = req.cookies;
-    console.log(cookies);
-    res.send("This is profile !!!");
-})
+    try{
+        const cookies = req.cookies;
+        //GET THE TOKEN
+        const {token} = cookies;     //The token we get inside cookie
+        const decodedMessage = jwt.verify(token,"SecretKey@123");   // The secret message that we passed while creating token
+        // console.log(decodedMessage);
+        const {_id} = decodedMessage;   //deconstructing the hidden message (here ID)
+        // console.log(_id);
+        res.send("This is profile !!!");
 
+        const userDetails = await User.findOne({_id:_id});
+        console.log(userDetails);
+    }
+    catch(err){
+        res.status(401).send("Unauthorized Access "+err.message);
+    }
+})
 
 //Get user by email
 app.get("/user",async (req,res)=>{
