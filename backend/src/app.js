@@ -45,7 +45,6 @@ app.post("/signup",async (req,res)=>{
 });
 
 //Login API
-
 app.post("/login",async (req,res)=>{
     try{
         const {emailId,password} = req.body;
@@ -60,12 +59,13 @@ app.post("/login",async (req,res)=>{
         }
 
         //Now we will check whether password is valid or not
-        const isPasswordValid = await bcrypt.compare(password,user.password);
+        const isPasswordValid = await user.verifyPassword(password);
 
-        //Password is valid
+        //Password is valid 
+         
         if(isPasswordValid){
             //Create a token wrt to id of user
-            const token = jwt.sign({exp:Math.floor(Date.now()/1000)+10,_id:user._id},"SecretKey@123");   //{_id:user._id} this is secret data
+            const token = await user.getJWT()   //{_id:user._id} this is secret data
             // console.log(token);
 
             res.cookie("token",token);  // Sent back the cookie with response

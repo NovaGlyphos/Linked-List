@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
-
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 
 //Schema of the collection
 const userSchema = mongoose.Schema({
@@ -55,6 +56,20 @@ const userSchema = mongoose.Schema({
         type:[String],
     }
 },{timestamps:true});
+
+userSchema.methods.getJWT = async function(){
+    const user = this;
+    const token = jwt.sign({exp:Math.floor(Date.now()/1000)+10,_id:user._id},"SecretKey@123");
+    return token;
+}
+
+
+userSchema.methods.verifyPassword = async function(passwordInputByUser){
+    const user = this;  //refers to that particular document
+    const passwordHashed = user.password;   // will get the value from DB
+    const hashedPass = await bcrypt.compare(passwordInputByUser,passwordHashed); //Comparing from DB and input
+    return hashedPass;
+}
 
 const userModel = mongoose.model("User",userSchema);  // User is the name of the model
 
