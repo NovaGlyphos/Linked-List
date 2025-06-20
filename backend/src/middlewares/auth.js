@@ -15,16 +15,16 @@ const userAuth = async (req,res,next) => {
             throw new Error("Token is not valid!!!!");
         }
         //Decoding the hidden message
-        const decodedData = jwt.verify(token,"SecretKey@123")     // {_id:user._id}
+        const decodedData = jwt.verify(token,"SecretKey")     // {_id:user._id}
         const {_id} = decodedData;
 
         const user = await User.findById(_id);
         if(!user){
-            throw new Error("User not found")
+            throw new Error("User not found");
         }
 
         //Attached user object with req
-        req.user = user;
+        req.user = user;  //Attaching user obj with req obj
         next();
     }
     catch(err){
