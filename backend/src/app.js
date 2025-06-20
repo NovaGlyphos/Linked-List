@@ -1,9 +1,6 @@
 const express = require('express');
 const {connectDB} = require("./config/database");
-const {validateSignUpData} = require('./utils/validations');
-const bcrypt = require('bcrypt');
 const cookieParser = require('cookie-parser');
-const jwt = require('jsonwebtoken');
 
 // Instance of application
 const app = express(); 
@@ -21,9 +18,11 @@ app.use(cookieParser());    // Used for parsing through cookies
 // Managing the routes
 const authRouter = require('./routes/auth');
 const profileRouter = require('./routes/profile');
+const requestRouter = require('./routes/request');
 
 app.use("/",authRouter);
 app.use("/",profileRouter);
+app.use('/',requestRouter);
 
 //Send connection Request
 app.post("/sendConnectionRequest",userAuth,async (req,res)=>{
