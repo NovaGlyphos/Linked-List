@@ -29,9 +29,9 @@ requestRouter.post("/request/send/:status/:toUserId",async (req,res) => {
             throw new Error("Receiver not found !!!");
         }
 
-        if(fromUserId === toUserId){
-            throw new Error("Khud ko ku bhej rha hai");
-        }
+        // if(fromUserId === toUserId){
+        //     throw new Error("Khud ko ku bhej rha hai");
+        // }
 
         //Checking the status in params
         const ALLOWED_STATUS = ["interested","ignore"];
