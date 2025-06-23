@@ -21,6 +21,41 @@ userRouter.get('/user/requests/received',userAuth,async (req,res)=>{
     catch(err){
         res.status(400).send("ERROR: "+err.message)
     }
-})
+});
+
+// connection API : give information of people who is in connection (accepted status)
+//logged in user is in either fromUserID or toUserId in connectionRequest DB
+userRouter.get("/user/connection",userAuth,async (req,res)=>{
+    try{
+        const loggedInUser = req.user;  // Coming from userAuth middleware
+        const {_id} = loggedInUser;   // login id of logged in user
+
+        // Logged in as AYUSH
+        // Ayush -> Mom  ==> accepted  (fromUserId)
+        // Mom -> Ayush ==> accepted    (toUserId)
+
+        const USER_SAFE_DATA = "firstName lastName photoUrl about skills age gender"
+
+        const connectionRequest = await ConnectionRequest.find({
+            $or:[
+                {fromUserId:_id,status:"accepted"},
+                {toUserId:_id,status:'accepted'}
+            ]
+        }).populate("fromUserId", USER_SAFE_DATA)
+        .populate("toUserId",USER_SAFE_DATA)
+
+        //I just want data associated with fromUser and toUser
+        const data = connectionRequest.map(row => ({
+            fromUser:row.fromUserId,
+            toUser:row.toUserId,
+        }));
+
+        res.json({data:data});
+    }
+    catch(err){
+        res.status(400).json({"message":err.message});
+    }
+});
+
 
 module.exports = userRouter;
