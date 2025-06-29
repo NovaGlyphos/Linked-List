@@ -2,10 +2,13 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Profile from "./components/Profile";
 import Body from "./components/Body";
 import Login from './components/Login'
+import appStore from './utils/appStore'
+import {Provider} from 'react-redux'
 
 function App() {
   return (
-    <div className='bg-black h-screen'> 
+    <Provider store={appStore}>
+      <div className='bg-black h-screen'> 
       <BrowserRouter basename="/">
         <Routes>
           <Route path="/" element={<Body />}>
@@ -15,6 +18,8 @@ function App() {
         </Routes>
       </BrowserRouter>
     </div>
+    </Provider>
+    
   );
 }
 
