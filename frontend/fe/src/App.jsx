@@ -5,7 +5,7 @@ import Login from './components/Login'
 
 function App() {
   return (
-    <>
+    <div className='bg-black h-screen'> 
       <BrowserRouter basename="/">
         <Routes>
           <Route path="/" element={<Body />}>
@@ -14,7 +14,7 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
-    </>
+    </div>
   );
 }
 

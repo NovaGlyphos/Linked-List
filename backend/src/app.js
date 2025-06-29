@@ -1,6 +1,7 @@
 const express = require('express');
 const {connectDB} = require("./config/database");
 const cookieParser = require('cookie-parser');
+const cors = require('cors')
 
 // Instance of application
 const app = express(); 
@@ -9,6 +10,11 @@ const app = express();
 const User = require("./models/user");
 
 //middlwares
+app.use(cors({
+    origin:"http://localhost:5173",  //white listing the domain
+    credentials:true   //This allows cookies, authorization headers, or TLS client certificates to be sent with the request.
+}));
+
 app.use(express.json());    // convert json of request to js object
 app.use(cookieParser());    // Used for parsing through cookies
 

@@ -52,7 +52,7 @@ authRouter.post('/login',async (req,res)=>{
         // If password is also correct then we will generate a token
         const token = jwt.sign({_id:user._id},"SecretKey"); // A token will be created for that specific user ID
         res.cookie("token",token);
-        res.send("Login successfull");
+        res.send(user);
     }
     catch(err){
         res.status(400).send("ERROR: "+err.message);
