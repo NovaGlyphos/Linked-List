@@ -6,17 +6,19 @@ const NavBar = () => {
   console.log(user);
   return (
     <div>
-      <div className="navbar bg-base-300 shadow-sm">
+      <div className="navbar bg-black shadow-sm h-20">
         <div className="flex-1">
           <a className="btn btn-ghost text-xl">TechTribe</a>
         </div>
         {user && (<div className="flex gap-2 mr-5">
-          <div className="dropdown dropdown-end">
+          <div className="dropdown dropdown-end flex items-center gap-6">
+            <p>Welcome back {user.firstName}</p>
             <div
               tabIndex={0}
               role="button"
-              className="btn btn-ghost btn-circle avatar"
+              className="btn btn-ghost btn-circle avatar flex"
             >
+              
               <div className="w-10 rounded-full">
                 <img
                   alt="Tailwind CSS Navbar component"

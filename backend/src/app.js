@@ -1,7 +1,7 @@
 const express = require('express');
 const {connectDB} = require("./config/database");
 const cookieParser = require('cookie-parser');
-const cors = require('cors')
+const cors = require('cors');
 
 // Instance of application
 const app = express(); 

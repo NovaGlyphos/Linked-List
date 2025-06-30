@@ -12,10 +12,10 @@ profileRouter.get("/profile/view",async (req,res)=>{
         const cookies = req.cookies;
         //Extract the token from cookie
         const {token} = cookies;
-        console.log(token)
+        // console.log(token)
         if(!token){
-            throw new Error("Token does not exist");
-        }
+            return res.status(401).send("Please login again")
+        } 
         const decodedData = jwt.verify(token,"SecretKey");
         // console.log(decodedData);
         if(!decodedData){
