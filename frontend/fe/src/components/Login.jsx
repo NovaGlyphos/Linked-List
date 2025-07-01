@@ -8,13 +8,14 @@ import { BASE_URL } from "../utils/constants";
 const Login = () => {
   const [emailId, setEmailId] = useState("ayush@gmail.com");
   const [password, setPassword] = useState("Test@12345");
+  const [error,setError] = useState("")
   const dispatch = useDispatch();
   const navigate = useNavigate();
   return (
-    <div className="flex justify-center mt-24">
-      <div className="card card-border bg-black w-96">
+    <div className="flex justify-center mt-20">
+      <div className="card card-border bg-black w-96 h-96">
         <div className="card-body">
-          <h2 className="card-title justify-center text-2xl mb-4">Login</h2>
+          <h2 className="card-title justify-center text-2xl mt-3 mb-4">Login</h2>
           <fieldset className="fieldset">
             <legend className="fieldset-legend text-base">Email</legend>
             <input
@@ -37,7 +38,8 @@ const Login = () => {
               }}
             />
           </fieldset>
-          <div className="card-actions justify-center mt-6">
+          <p className="flex justify-center text-red-700 font-bold text-base mt-1">{error}</p>
+          <div className="card-actions justify-center mb-1">
             <button
               className="btn btn-black card-border"
               onClick={async () => {
@@ -49,9 +51,10 @@ const Login = () => {
                   },{withCredentials:true});
                   // console.log(res.data)
                   dispatch(addUser(res.data));
-                  return navigate("/feed");
+                  return navigate("/");
                 } catch (err) {
-                  console.log(err.message);
+                  // console.log(err)
+                  setError(err?.response?.data || "Something went wrong")
                 }
               }}
             >
