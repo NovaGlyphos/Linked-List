@@ -12,7 +12,7 @@ const NavBar = () => {
   console.log(user);
   return (
     <div>
-      <div className="navbar bg-black shadow-sm h-20">
+      <div className="navbar bg-base-300  h-20">
         <div className="flex-1">
           <Link to='/' className="btn btn-ghost text-xl">TechTribe</Link>
         </div>

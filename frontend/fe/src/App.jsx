@@ -9,7 +9,7 @@ import {Provider} from 'react-redux'
 function App() {
   return (
     <Provider store={appStore}>
-      <div className='bg-black h-screen'> 
+      <div className='bg-base-300 h-screen'> 
       <BrowserRouter basename="/">
         <Routes>
           <Route path="/" element={<Body />}>
