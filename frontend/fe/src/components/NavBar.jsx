@@ -14,7 +14,7 @@ const NavBar = () => {
     <div>
       <div className="navbar bg-base-300  h-20">
         <div className="flex-1">
-          <Link to='/' className="btn btn-ghost text-xl">TechTribe</Link>
+          <Link to='/' className="btn btn-ghost text-xl">Linked List</Link>
         </div>
         {user && (<div className="flex gap-2 mr-5">
           <div className="dropdown dropdown-end flex items-center gap-6">

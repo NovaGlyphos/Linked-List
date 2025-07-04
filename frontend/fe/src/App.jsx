@@ -6,10 +6,13 @@ import Feed from './components/Feed'
 import appStore from './utils/appStore'
 import {Provider} from 'react-redux'
 
+
+
 function App() {
   return (
+    
     <Provider store={appStore}>
-      <div className='bg-base-300 h-screen'> 
+      <div className='bg-base-300 min-h-screen'> 
       <BrowserRouter basename="/">
         <Routes>
           <Route path="/" element={<Body />}>

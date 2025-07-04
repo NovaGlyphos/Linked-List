@@ -63,13 +63,15 @@ profileRouter.patch("/profile/edit",async (req,res)=>{
             throw new Error("You are passing some extra field")
         }
         //Check whether user is authorised or not
-        if(!_id === userId){
+        if(_id !== userId){
             throw new Error("Unauthorised Access!!!");
         }
 
         const user = await User.findByIdAndUpdate(userId,data);
-        console.log(user);
-        res.send("Profile updated successfully");
+        // console.log(user);
+        res.json({"message":"Profile updated successfully",
+            "data": user
+        });
     }
     catch(err){
         res.status(400).send("ERROR: "+err.message);
