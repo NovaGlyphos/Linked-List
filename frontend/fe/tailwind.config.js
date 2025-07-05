@@ -5,7 +5,12 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        outfit: ['"Outfit"', 'sans-serif'],
+        bitcount: ['"Bitcount Grid Double"', 'system-ui'],
+      },
+    },
   },
   plugins: [require("daisyui")],
 }
