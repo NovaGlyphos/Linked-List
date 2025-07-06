@@ -3,15 +3,19 @@ import React, { useEffect } from "react";
 import axios from "axios";
 import { BASE_URL } from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
-import { addRequest } from "../utils/requestSlice";
+import { addRequest, removeRequest } from "../utils/requestSlice";
 
 const Requests = () => {
   const dispatch = useDispatch();
   const requests = useSelector((store) => store.request);
-  const handleRequest = async (status,id) => {
-    const res = await axios.post(BASE_URL+"/request/review/"+status+"/"+id,{},{withCredentials:true});
+  const handleRequest = async (status, id) => {
+    const res = await axios.post(
+      BASE_URL + "/request/review/" + status + "/" + id,
+      {},
+      { withCredentials: true }
+    );
     console.log(res.data);
-  }
+  };
   const getRequest = async () => {
     try {
       const res = await axios.get(BASE_URL + "/user/requests/received", {
@@ -56,17 +60,32 @@ const Requests = () => {
       <ul className="list bg-base-100 rounded-box shadow-md mx-96">
         {requests.map((req) => {
           return (
-            <li key={req.fromUserId._id} className="list-row flex justify-around">
+            <li
+              key={req.fromUserId._id}
+              className="list-row flex justify-around"
+            >
               <div>
                 <div>
                   {req.fromUserId.firstName + " " + req.fromUserId.lastName}
                 </div>
               </div>
               <div>
-                <button className="btn btn-circle" onClick={()=>handleRequest("rejected",req._id)}>
+                <button
+                  className="btn btn-circle"
+                  onClick={() => {
+                    handleRequest("rejected", req._id);
+                    dispatch(removeRequest(req.id));
+                  }}
+                >
                   ❌
                 </button>
-                <button className="btn btn-circle" onClick={()=>handleRequest("accepted",req._id)}>
+                <button
+                  className="btn btn-circle"
+                  onClick={() => {
+                    handleRequest("accepted", req._id);
+                    dispatch(removeRequest(req.id));
+                  }}
+                >
                   ✔
                 </button>
               </div>
