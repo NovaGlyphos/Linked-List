@@ -10,6 +10,7 @@ profileRouter.get("/profile/view",async (req,res)=>{
     try{
         //Get the cookie
         const cookies = req.cookies;
+        // console.log(cookies)
         //Extract the token from cookie
         const {token} = cookies;
         // console.log(token)
@@ -22,7 +23,7 @@ profileRouter.get("/profile/view",async (req,res)=>{
             throw new Error("Invalid token");
         }
         const {_id} = decodedData;
-        console.log(_id)
+        // console.log(_id)
         const user = await User.findById(_id);
         if(!user){
             throw new Error("User doent exist");
@@ -47,7 +48,7 @@ profileRouter.patch("/profile/edit",async (req,res)=>{
         }
         // From the token we extract the hidden data using secret key
         const decodedData = jwt.verify(token,"SecretKey");
-        console.log(decodedData);     //{ _id: '6851e6905faab86c654ca281', iat: 1750338939 }
+        // console.log(decodedData);     //{ _id: '6851e6905faab86c654ca281', iat: 1750338939 }
         //We got the id associated with the cookie that is present
         const {_id} = decodedData;    //6851e6905faab86c654ca281
 

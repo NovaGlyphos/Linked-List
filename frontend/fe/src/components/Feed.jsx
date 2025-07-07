@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { BASE_URL } from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { addFeed } from "../utils/feedSlice";
-import UserCard from "./userCard";
+import UserCard from "./UserCard";
 
 const Feed = () => {
   const feed = useSelector((store)=>store.feed)   //accesing the feed slice from store : null
@@ -26,9 +26,10 @@ const Feed = () => {
   useEffect(() => {
     getFeed();
   }, []);
+  
 // dont render until feed is not null
   return feed && (<div className="flex justify-center mt-6"> 
-    <UserCard user={feed[0]} />
+    <UserCard user={feed[0]} /> 
   </div>);
 };
 

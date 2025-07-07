@@ -10,15 +10,14 @@ const Requests = () => {
   const requests = useSelector((store) => store.request);
   const handleRequest = async (status, id) => {
     const res = await axios.post(
-      BASE_URL + "/request/review/" + status + "/" + id,
-      {},
-      { withCredentials: true }
+      BASE_URL + "/request/review/" + status + "/" + id,{},
+      { withCredentials:true }
     );
     console.log(res.data);
   };
   const getRequest = async () => {
     try {
-      const res = await axios.get(BASE_URL + "/user/requests/received", {
+      const res = await axios.get(BASE_URL + "/user/requests/received",{
         withCredentials: true,
       });
       dispatch(addRequest(res.data.connectionReceived));

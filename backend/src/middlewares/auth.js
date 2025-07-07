@@ -12,7 +12,7 @@ const userAuth = async (req,res,next) => {
         //Taking out the token
         const {token} = cookies;
         if(!token){
-            throw new Error("Token is not valid!!!!");
+            throw new Error("Token is not valid!!!!😭");
         }
         //Decoding the hidden message
         const decodedData = jwt.verify(token,"SecretKey")     // {_id:user._id}

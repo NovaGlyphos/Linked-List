@@ -7,17 +7,22 @@ const {userAuth} = require('../middlewares/auth')
 const requestRouter = express.Router();
 
 // interested and ignore - Sender Side
-requestRouter.post("/request/send/:status/:toUserId",async (req,res) => {
+requestRouter.post("/request/send/:status/:toUserId",userAuth,async (req,res) => {
     try{
-        const cookies = req.cookies;
-        const {token} = cookies;
-        if(!token){
-            throw new Error("Token does not exist");
-        }
+        const loggedInUser = req.user;
+        // const cookies = req.cookies;
+        // console.log(cookies);
+        // const {token} = cookies;
+        // console.log(token);
+        // if(!token){
+        //     throw new Error("Token does not exist");
+        // }
 
-        const decodedData = jwt.verify(token,"SecretKey");
-        const {_id} = decodedData;
+        // const decodedData = jwt.verify(token,"SecretKey");
+        // const {_id} = decodedData;
+        const {_id} = loggedInUser;
         const fromUserId = _id;
+
         const toUserId = req.params.toUserId;
         const status = req.params.status;
 
@@ -30,17 +35,17 @@ requestRouter.post("/request/send/:status/:toUserId",async (req,res) => {
             throw new Error("Receiver not found !!!");
         }
 
-        // if(fromUserId === toUserId){
-        //     throw new Error("Khud ko ku bhej rha hai");
-        // }
+        if(fromUserId === toUserId){
+            throw new Error("acha");
+        }
 
         //Checking the status in params
         const ALLOWED_STATUS = ["interested","ignore"];
         const isAllowed = ALLOWED_STATUS.includes(status);
+
         if(!isAllowed){
             throw new Error("Invalid status type "+status);
         }
-
 
         // Check if there is an existing connection request
         const existingConnectionRequest = await ConnectionRequest.findOne({
@@ -52,8 +57,6 @@ requestRouter.post("/request/send/:status/:toUserId",async (req,res) => {
         if(existingConnectionRequest){
             throw new Error("Cannot perform this")
         }
-
-
 
         //create the connection request instance
         const connectionRequest = new ConnectionRequest({
@@ -72,7 +75,7 @@ requestRouter.post("/request/send/:status/:toUserId",async (req,res) => {
         });
     }
     catch(err){
-        res.status(400).send("ERROR: "+err.message);
+        res.status(400).send("This is error: "+err.message);
     }
 });
 
