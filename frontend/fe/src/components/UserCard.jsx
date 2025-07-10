@@ -1,28 +1,31 @@
 import React from "react";
 import axios from "axios"
 import {BASE_URL} from "../utils/constants"
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import { removeUserFromFeed } from "../utils/feedSlice";
+import {useNavigate} from "react-router-dom"
 
 const UserCard = ({ user }) => {
-  const loggedInUser = useSelector((store)=>store.user);
-  console.log("Logged In user Id"+loggedInUser._id);
+  // const loggedInUser = useSelector((store)=>store.user);
+  // console.log("Logged In user Id"+loggedInUser._id);
 
-  console.log(user)
-    const {_id,firstName,lastName,age,gender,about,photoUrl} = loggedInUser;
-    console.log(_id);
+  // console.log(user)
+    const {_id,firstName,lastName,age,gender,about,photoUrl} = user;
+    // console.log(_id);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const handleSendRequest = async (status,userId) => {
       try{
         const res = await axios.post(BASE_URL+"/request/send/"+status+"/"+userId,{},{withCredentials:true});
         console.log(res.data);
         dispatch(removeUserFromFeed(userId))
+        navigate("/");
       }
       catch(err){
         console.log(err.message)
       }
     }
-    if(loggedInUser.length === 0) {
+    if(!user) {
       return (
       <h1 className="text-2xl mt-3 text-bold flex justify-center gap-2 ">
         <div>

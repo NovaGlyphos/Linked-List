@@ -36,7 +36,7 @@ requestRouter.post("/request/send/:status/:toUserId",userAuth,async (req,res) =>
         }
 
         if(fromUserId === toUserId){
-            throw new Error("acha");
+            throw new Error("Hello");
         }
 
         //Checking the status in params
