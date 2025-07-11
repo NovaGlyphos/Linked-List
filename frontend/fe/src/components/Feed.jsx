@@ -38,6 +38,13 @@ const Feed = () => {
   console.log("Updated feed:", feed);
 }, [feed]);
   
+if(!feed){
+  return
+}
+
+if(feed.length === 0){
+  return <h1>No more users</h1>
+}
 
 // dont render until feed is not null
   return feed && (<div className="flex justify-center mt-6"> 

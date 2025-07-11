@@ -50,24 +50,24 @@ const Connections = () => {
       </h1>
       <ul  className="list bg-base-100 rounded-box shadow-md mx-56">
         {connections.map((connection) => {
-          console.log(connection.fromUser.firstName);
+          console.log(connection.firstName);
           return (
-            <li key={connection.fromUser._id} className="list-row">
+            <li key={connection._id} className="list-row">
               <div>
                 <img
                   className="size-10 rounded-box"
-                  src={connection.fromUser.photoUrl}
+                  src={connection.photoUrl}
                 />
               </div>
               <div>
                 <div>
-                  {connection.fromUser.firstName +
+                  {connection.firstName +
                     " " +
-                    connection.fromUser.lastName}
+                    connection.lastName}
                 </div>
               </div>
               <p className="list-col-wrap text-xs">
-                {connection.fromUser.about}
+                {connection.about}
               </p>
               <button className="btn btn-square btn-ghost">
                 🚀

@@ -55,10 +55,13 @@ userRouter.get("/user/connection", userAuth, async (req, res) => {
       toUser: row.toUserId,
     }));
 
-    const filteredData = data.filter((row) => {
-      return (
-        row.fromUser._id !== _id.toString() && row.toUser._id !== _id.toString()
-      );
+    const filteredData = data.map((row) => {
+      if(row.fromUser._id.toString() === _id.toString()){
+        return row.toUser;
+      }
+      else if (row.toUser._id.toString() === _id.toString()){
+        return row.fromUser;
+      }
     });
 
     res.json({ data: filteredData });

@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constants";
 import axios from "axios"
 import { removeUser } from "../utils/userSlice";
+import { clearFeed } from "../utils/feedSlice";
 
 const NavBar = () => {
   // useSelector hook is used to subscribe to the store
@@ -57,6 +58,7 @@ const NavBar = () => {
                     await axios.post(BASE_URL+"/logout",{},{withCredentials:true});
                     // console.log(res);
                     dispatch(removeUser())
+                    dispatch(clearFeed());
                     navigate('/login') //navigate back to /login
                   }
                   catch(err){
