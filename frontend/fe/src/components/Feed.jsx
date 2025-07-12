@@ -47,9 +47,10 @@ if(feed.length === 0){
 }
 
 // dont render until feed is not null
-  return feed && (<div className="flex justify-center mt-6"> 
-    <UserCard user={feed[0]} /> 
+  return feed && (<div  className="flex justify-center mt-6 cursor-pointer relative"> 
+    <UserCard user={feed[0]}/> 
   </div>);
+  
 };
 
 export default Feed;

@@ -63,7 +63,7 @@ const userSchema = mongoose.Schema({
 // To get the JWT token
 userSchema.methods.getJWT = async function(){
     const user = this;
-    const token = jwt.sign({exp:Math.floor(Date.now()/1000)+3600,_id:user._id},"SecretKey@123");
+    const token = jwt.sign({exp:Math.floor(Date.now()/1000)+3600,_id:user._id},"SecretKey");
     return token;
 }
 
