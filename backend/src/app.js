@@ -2,9 +2,6 @@ const express = require("express");
 const { connectDB } = require("./config/database");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
-const http = require("http")
-const initializeSocket = require("./utils/socket")
-require('dotenv').config()
 
 // Instance of application
 const app = express();
@@ -16,7 +13,7 @@ const User = require("./models/user");
 
 // middlwares
 app.use(cors({
-    origin:"http://localhost:5173",  //whiteListing the domain
+    origin:"https://linked-list-rose.vercel.app/",  //whiteListing the domain
     credentials:true,   //This allows cookies, authorization headers, or TLS client certificates to be sent with the request.
     methods:["GET","POST","PUT","PATCH","DELETE","OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"]
@@ -43,7 +40,7 @@ app.use("/", userRouter);
 connectDB()
   .then(() => {
     console.log("Database connection established......");
-    server.listen(process.env.PORT, () => {
+    app.listen(3000, () => {
       console.log("server is running at port 3000");
     });
   })
