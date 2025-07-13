@@ -51,7 +51,7 @@ const Login = () => {
                   },{withCredentials:true});
                   // console.log(res.data)
                   dispatch(addUser(res.data));
-                  return navigate("/");
+                  return navigate("/login");
                 } catch (err) {
                   // console.log(err)
                   setError(err?.response?.data || "Something went wrong")

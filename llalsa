@@ -1,0 +1,227 @@
+[33mcommit 38b07937baf79ecd67909579cac652b5165b6a18[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Ayush <ag13015002@gmail.com>
+Date:   Sun Jul 13 22:59:33 2025 +0530
+
+    added vercel url
+
+[33mcommit 3a30fa3a691d14deeccfff464d856e75c8324264[m
+Author: Ayush <ag13015002@gmail.com>
+Date:   Sat Jul 12 19:18:51 2025 +0530
+
+    feat: swipe card using framer motion
+
+[33mcommit 6b98ddd083574cea773b6243641cd5e7bb0497f8[m
+Author: Ayush <ag13015002@gmail.com>
+Date:   Fri Jul 11 23:26:56 2025 +0530
+
+    feat:signup page and  fixes in connection logic
+
+[33mcommit 2dac96a4fe500d600adae144073bb77a6b017176[m
+Author: Ayush <ag13015002@gmail.com>
+Date:   Thu Jul 10 23:45:49 2025 +0530
+
+    minor changes
+
+[33mcommit 6aaeaa88d9b605dfde15335fad13d9ad03fc2f4f[m
+Author: Ayush <ag13015002@gmail.com>
+Date:   Mon Jul 7 23:06:59 2025 +0530
+
+    feat: request accept and reject + refactoring
+
+[33mcommit 10c054bebc62170316deb28344856487eb9b20a2[m
+Author: Ayush <ag13015002@gmail.com>
+Date:   Sun Jul 6 23:23:45 2025 +0530
+
+    minor change Request page
+
+[33mcommit 770acbc58a6abe26995aa98a348bbf298c57082f[m
+Author: Ayush <ag13015002@gmail.com>
+Date:   Sun Jul 6 21:32:46 2025 +0530
+
+    feat:Request Page (accept and reject)
+
+[33mcommit b672705182b30db5abd0eac43297b3d7099aaa54[m
+Author: Ayush <ag13015002@gmail.com>
+Date:   Sun Jul 6 04:00:35 2025 +0530
+
+    feat(request-page): add initial layout with basic functionality
+
+[33mcommit c1a4f76d8a3cfc303e611a9d4f0035dfda4a397b[m
+Author: Ayush <ag13015002@gmail.com>
+Date:   Sat Jul 5 18:11:52 2025 +0530
+
+    feat:Connection Page
+
+[33mcommit 0cd4dd4700ba987f37cf97863886551943cca466[m
+Author: Ayush <ag13015002@gmail.com>
+Date:   Fri Jul 4 18:27:30 2025 +0530
+
+    feat:profile update and preview
+
+[33mcommit 2a7a42459ff3a6ceb9c8e5c64ad8dd684e54410d[m
+Author: Ayush <ag13015002@gmail.com>
+Date:   Fri Jul 4 03:43:14 2025 +0530
+
+    minor changes
+
+[33mcommit a5dc0f92c7231811976578cfc16ad88fb342bcef[m
+Author: Ayush <ag13015002@gmail.com>
+Date:   Wed Jul 2 02:53:52 2025 +0530
+
+    built logout feature
+
+[33mcommit 5896ab8c70d5912120ec3cbadae2191e6ebf3137[m
+Author: Ayush <ag13015002@gmail.com>
+Date:   Mon Jun 30 23:59:54 2025 +0530
+
+    Login page done be + fe
+
+[33mcommit 99359e288858c49b6ff78f61a9e2341f65e45cfc[m
+Author: Ayush <ag13015002@gmail.com>
+Date:   Mon Jun 30 04:01:48 2025 +0530
+
+    created a redux store + user slice
+
+[33mcommit 94fbc5b55ec7103e520947eac7f10e592d65b5c8[m
+Author: Ayush <ag13015002@gmail.com>
+Date:   Sun Jun 29 13:53:35 2025 +0530
+
+    Integrated BE & FE of Login page using axios + Resolved CORS error
+
+[33mcommit 798dfdcd8becb9b63f61d6d9412854674386849d[m
+Author: Ayush <ag13015002@gmail.com>
+Date:   Sat Jun 28 23:47:16 2025 +0530
+
+    initialized frontend and basic routing
+
+[33mcommit c1a44f8332088b4d9b236dacef0ee094066838f9[m
+Author: Ayush <ag13015002@gmail.com>
+Date:   Sat Jun 28 01:47:51 2025 +0530
+
+    paginated the feed
+
+[33mcommit 051b852f6f9355b04ed2bab8af820995ab48005a[m
+Author: Ayush <ag13015002@gmail.com>
+Date:   Fri Jun 27 23:04:14 2025 +0530
+
+    feed API ✔
+
+[33mcommit f56be1c1741831815416d26763dfa79b67eedb63[m
+Author: Ayush <ag13015002@gmail.com>
+Date:   Mon Jun 23 21:25:10 2025 +0530
+
+    User connection API ✔
+
+[33mcommit 8a2202b6c6e916dea2f444a9b4b116fd6183e6c6[m
+Author: Ayush <ag13015002@gmail.com>
+Date:   Sat Jun 21 22:56:01 2025 +0530
+
+    User request API ✔ + ref and populate
+
+[33mcommit 2ac7aa906e60e096195ed5ac4ee6de7dfb629c5c[m
+Author: Ayush <ag13015002@gmail.com>
+Date:   Sat Jun 21 03:23:52 2025 +0530
+
+    connection request review api
+
+[33mcommit a44999f73b916139c8497ee24b459ef731082248[m
+Author: Ayush <ag13015002@gmail.com>
+Date:   Fri Jun 20 21:21:50 2025 +0530
+
+    pre schema method + compound index ✔
+
+[33mcommit 83fa25c7b18679880c8ae43d4f1ba0e6621b3251[m
+Author: Ayush <ag13015002@gmail.com>
+Date:   Fri Jun 20 17:17:38 2025 +0530
+
+    connection request api ✔
+
+[33mcommit c6d5c06f6db5b1193dfff510f4c9188659844adb[m
+Author: Ayush <ag13015002@gmail.com>
+Date:   Thu Jun 19 23:37:37 2025 +0530
+
+    update profile api ✔
+
+[33mcommit 90e225ae08fd6f3967ed0edaa520ee8f02c99d29[m
+Author: Ayush <ag13015002@gmail.com>
+Date:   Wed Jun 18 03:59:13 2025 +0530
+
+    Introduced express router + Refactoring code
+
+[33mcommit 5f57fc921aab303a025b62c168aa332c8c8ac20b[m
+Author: Ayush <ag13015002@gmail.com>
+Date:   Tue Jun 17 23:35:37 2025 +0530
+
+    Mongoose schema methods
+
+[33mcommit e962ca290b1ef6c07eef25ca8f677709276d45eb[m
+Author: Ayush <ag13015002@gmail.com>
+Date:   Tue Jun 17 22:37:03 2025 +0530
+
+    Created an auth middleware
+
+[33mcommit a318575562b8e0ee4ff926dd92e287633ff92ba1[m
+Author: Ayush <ag13015002@gmail.com>
+Date:   Tue Jun 17 14:05:31 2025 +0530
+
+    Implemented JWT token with /profile
+
+[33mcommit d846f1801ff4b1b2e18c3ef40edac9ac24eb7d4a[m
+Author: Ayush <ag13015002@gmail.com>
+Date:   Tue Jun 17 01:13:13 2025 +0530
+
+    CREATED A SIMPLE COOKIE
+
+[33mcommit 9971c4a667b9aedd4f476543c488f06b6846c300[m
+Author: Ayush <ag13015002@gmail.com>
+Date:   Mon Jun 16 20:18:49 2025 +0530
+
+    Encrypted password + created Login API
+
+[33mcommit 1f7ecfbb7435c2dbe3f2135524ce78b5441eccb9[m
+Author: Ayush <ag13015002@gmail.com>
+Date:   Sun Jun 15 22:50:50 2025 +0530
+
+    use of validator package
+
+[33mcommit 56960ce66021d078db48c0438c099c7a7ff60eeb[m
+Author: Ayush <ag13015002@gmail.com>
+Date:   Sun Jun 15 18:33:33 2025 +0530
+
+    added API level validations
+
+[33mcommit db16addf57d02ee1d8609af6e31cbe10b7dec25c[m
+Author: Ayush <ag13015002@gmail.com>
+Date:   Sun Jun 15 16:15:18 2025 +0530
+
+    Added schema level validations
+
+[33mcommit 26a59fe4f319c646de9b1662aa8eff0f70079038[m
+Author: Ayush <ag13015002@gmail.com>
+Date:   Sun Jun 15 02:08:15 2025 +0530
+
+    update Api
+
+[33mcommit 57301054ecc43abea374218ed0f28c225d067db7[m
+Author: Ayush <ag13015002@gmail.com>
+Date:   Sat Jun 14 23:40:57 2025 +0530
+
+    made some GET apis
+
+[33mcommit 8deb5dcecb180ee60fb393c8fe71b48a7a457959[m
+Author: Ayush <ag13015002@gmail.com>
+Date:   Sat Jun 14 19:45:22 2025 +0530
+
+    dynamic data sending
+
+[33mcommit c3f05bdac2d14bad6c33092955b463a1ef68f38e[m
+Author: Ayush <ag13015002@gmail.com>
+Date:   Sat Jun 14 14:04:26 2025 +0530
+
+    Database connection established
+
+[33mcommit 3fd9b560c8436458b8f9c5ac15b38e4403e1c1d3[m
+Author: Ayush <ag13015002@gmail.com>
+Date:   Wed Jun 4 18:23:06 2025 +0530
+
+    first commit
