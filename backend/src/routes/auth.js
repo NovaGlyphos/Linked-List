@@ -4,6 +4,7 @@ const { validateSignUpData } = require("../utils/validations");
 const bcrypt = require("bcrypt");
 const User = require("../models/user");
 const jwt = require("jsonwebtoken");
+const key = process.env.JWT_SECRET
 
 const authRouter = express.Router();
 
@@ -54,7 +55,7 @@ authRouter.post("/login", async (req, res) => {
       throw new Error("Invalid credentials");
     }
     // If password is also correct then we will generate a token
-    const token = jwt.sign({ _id: user._id }, "SecretKey"); // A token will be created for that specific user ID
+    const token = jwt.sign({ _id: user._id }, key); // A token will be created for that specific user ID
     res.cookie("token", token);
     res.send(user);
   } catch (err) {

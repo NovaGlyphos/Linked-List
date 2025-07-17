@@ -4,6 +4,7 @@ const User = require('../models/user');
 
 const profileRouter = express.Router();
 
+const key = process.env.JWT_SECRET
 
 
 profileRouter.get("/profile/view",async (req,res)=>{
@@ -17,7 +18,7 @@ profileRouter.get("/profile/view",async (req,res)=>{
         if(!token){
             return res.status(401).send("Please login again")
         } 
-        const decodedData = jwt.verify(token,"SecretKey");
+        const decodedData = jwt.verify(token,key);
         // console.log(decodedData);
         if(!decodedData){
             throw new Error("Invalid token");
@@ -47,7 +48,7 @@ profileRouter.patch("/profile/edit",async (req,res)=>{
             throw new Error("Token does not exist");
         }
         // From the token we extract the hidden data using secret key
-        const decodedData = jwt.verify(token,"SecretKey");
+        const decodedData = jwt.verify(token,key);
         // console.log(decodedData);     //{ _id: '6851e6905faab86c654ca281', iat: 1750338939 }
         //We got the id associated with the cookie that is present
         const {_id} = decodedData;    //6851e6905faab86c654ca281
